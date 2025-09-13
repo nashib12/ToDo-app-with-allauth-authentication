@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Home
+{% endblock title %}
+
+{% block contents %}
+  <div class="container">
+    <div class="row">
+      <h1>Hello</h1>
+      {% if user.is_authenticated %}
+      <a href="{% url 'details' %}"><button class="btn btn-lg btn-success fs-4">View List</button></a>  
+      <a href="{% url 'log-out' %}"><button class="btn btn-lg btn-dark text-light fs-4">Log Out</button></a>
+      {% else %}
+      <a href="{% url 'log-in' %}"><button class="btn btn-lg btn-success fs-4">Log-in</button></a>
+      <a href="{% url 'registration' %}"><button class="btn btn-lg btn-success fs-4">Register</button></a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock contents %}

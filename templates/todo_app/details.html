@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Home
+{% endblock title %}
+
+{% block contents %}
+  <div class="container">
+    <div class="row">
+        <h1>Lists</h1>
+        <a href="{% url 'add-item' %}"><button class="btn btn-lg btn-success fs-4"><i class="fa-solid fa-plus"></i></button></a>
+
+        {% for item in list %}
+            {{ item.date|date:"M d, Y" }} {{ item.content }} <a href="{% url 'update-item' item.id %}"><button class="btn btn-lg btn-primary fs-4"><i class="fa-solid fa-pen-to-square"></i></button></a> <form action="{% url 'delete-item' item.id %}" method="post">{% csrf_token %}<button class="btn btn-lg btn-danger fs-4"><i class="fa-solid fa-delete-left"></i></button></form>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock contents %}

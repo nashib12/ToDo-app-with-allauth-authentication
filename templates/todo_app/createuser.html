@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% block title %}
+  User Registration
+{% endblock title %}
+{% block contents %}
+  <div class="container">
+    <div class="row">
+        <h1 class="text-center fw-bold mb-3">Create your Account</h1>
+        {% if form.errors %}
+          <div class="alert alert-danger">
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <form action="{% url 'registration' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="my-3">
+                <button type="submit" class="btn btn-lg btn-dark text-light fs-5 px-3 py-2 rounded-2 fs-5">Create Account</button>
+            </div>
+        </form>
+        <div class="mb-3">
+            <a href="{% provider_login_url 'google' %}" class="text-decoration-none"><button class="btn btn-lg btn-secondary text-dark fs-5 px-3 py-2 rounded-3"><i class="fs-brands fs-google fs-5"></i> &nbsp; Continue with Google</button></a>
+        </div>
+        <div class="mb-3">
+          <span class="fs-5"> Already have a account ?</span> <a href="{% url 'log-in' %}" class="text-decoration-none"><button class="btn btn-link text-dark fs-5 px-3 py-2 rounded-3"> Sign In </button></a>
+        </div>
+    </div>
+  </div>
+{% endblock contents %}
